@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* JH Leasing Brand Color System */
+    /* Euphorbia #F4906B | Spellbound #273544 | Bright White #F4F5F0 */
+    --background: 72 20% 95%;          /* #F4F5F0 */
+    --foreground: 211 27% 21%;         /* #273544 */
+
+    --card: 72 14% 91%;               /* #E8E9E4 */
+    --card-foreground: 211 27% 21%;
+
+    --popover: 72 14% 91%;
+    --popover-foreground: 211 27% 21%;
+
+    --primary: 16 86% 69%;            /* #F4906B */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 211 27% 21%;         /* #273544 */
+    --secondary-foreground: 72 20% 95%;
+
+    --muted: 211 15% 50%;
+    --muted-foreground: 211 15% 45%;
+
+    --accent: 16 86% 69%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 72 10% 87%;
+    --input: 72 20% 95%;
+    --ring: 16 86% 69%;
+
+    --radius: 1rem;
+
+    /* Neumorphic shadows adapted to Bright White bg */
+    --shadow-raised: -12px -12px 24px #FFFFFF, 12px 12px 24px #D5D6D1;
+    --shadow-inset: inset 10px 10px 20px #D5D6D1, inset -10px -10px 20px #FFFFFF;
+    --shadow-inset-sm: inset 4px 4px 8px #D5D6D1, inset -4px -4px 8px #FFFFFF;
+    --shadow-tag: 4px 4px 8px #D5D6D1, -4px -4px 8px #FFFFFF;
+    --shadow-inner-glow: inset 0 0 80px rgba(255,255,255,0.5);
+    --shadow-accent: 0 20px 40px rgba(244,144,107,0.3);
+
+    --sidebar-background: 211 27% 21%;
+    --sidebar-foreground: 72 20% 95%;
+    --sidebar-primary: 16 86% 69%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 211 20% 28%;
+    --sidebar-accent-foreground: 72 20% 95%;
+    --sidebar-border: 211 20% 30%;
+    --sidebar-ring: 16 86% 69%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* Neumorphic card */
+  .neu-card {
+    background: linear-gradient(145deg, #F7F8F3, #EDEEE9);
+    box-shadow: var(--shadow-raised);
+    border-radius: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neu-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: var(--shadow-inner-glow);
+    pointer-events: none;
+    border-radius: 32px;
+  }
+
+  /* Neumorphic accent card */
+  .neu-accent {
+    background-color: hsl(var(--primary));
+    box-shadow: var(--shadow-accent);
+    border-radius: 32px;
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Inset (pressed) effect */
+  .neu-inset {
+    box-shadow: var(--shadow-inset);
+    background: hsl(var(--background));
+    border-radius: 12px;
+  }
+
+  .neu-inset-sm {
+    box-shadow: var(--shadow-inset-sm);
+    background: hsl(var(--background));
+  }
+
+  /* Raised tag */
+  .neu-tag {
+    box-shadow: var(--shadow-tag);
+    background: hsl(var(--background));
+  }
+
+  .neu-tag-active {
+    box-shadow: var(--shadow-inset-sm);
+    background: hsl(var(--background));
+    color: hsl(var(--primary));
+  }
+
+  /* Nav pill */
+  .neu-nav {
+    background: linear-gradient(145deg, #F7F8F3, #EDEEE9);
+    box-shadow: var(--shadow-raised);
+    border-radius: 50px;
+  }
+
+  .label-micro {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: hsl(var(--muted-foreground));
+    font-weight: 600;
+  }
+
+  .heading-xl {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 0.95;
+  }
+
+  .heading-lg {
+    font-size: clamp(24px, 2.5vw, 32px);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .heading-md {
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+}
+
+/* reCAPTCHA challenge must float above Radix Dialog overlay (z-50) */
+body > div[style*="z-index"]:has(iframe[src*="recaptcha"]),
+body > div[style*="z-index"]:has(iframe[title*="recaptcha"]),
+iframe[src*="recaptcha/api2/bframe"],
+iframe[src*="recaptcha/enterprise/bframe"] {
+  z-index: 2147483647 !important;
+}
+
+
+/* Range input thumb styling */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  border: none;
+}
